@@ -10,7 +10,9 @@
     "removeComments": false,
     "noImplicitAny": false
   },
-    "files": [
-    "./assets/app/*"
+  "exclude": [
+    "node_modules",
+    "typings/main",
+    "typings/main.d.ts"
   ]
- }
+}

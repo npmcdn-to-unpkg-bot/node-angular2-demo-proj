@@ -12,7 +12,7 @@ var sourcemaps = require('gulp-sourcemaps');
 // Other
 var concat = require('gulp-concat');
 
-const tsProject = typescript.createProject('./tsconfig.json').compilerOption;
+const tsProject = typescript.createProject('tsconfig.json');
 
 gulp.task('tsconfig-glob', function () {
   return tsconfig({

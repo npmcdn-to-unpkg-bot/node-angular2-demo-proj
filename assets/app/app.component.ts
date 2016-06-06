@@ -12,9 +12,20 @@ import {MessageComponent} from './messages/message.component';
    
 })
 export class AppComponent {
-    message = {
-        content: 'test content',
-        author: 'AK'
-    }
+    // messages = [
+    //     {
+    //     content: 'test content',
+    //     userName: 'AK'
+    //     },
+    //     {
+    //         content:'test2 content',
+    //         userName: 'Max'
+    //     }
     
+    // ]
+    message = {content: 'test content', userName: 'Max'}
+    
+    // changeContent (event) {
+    //     this.message.content = "app chaned content"
+    // }
 }
