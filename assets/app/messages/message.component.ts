@@ -5,11 +5,6 @@ import {Message} from './message';
 @Component({
     selector: 'my-message',
     template: `
-        <div class="row">
-    <section class="col-md-8 col-md-offset-2">
-        <input type="text" [(ngModel)]="message.content">
-    </section>
-</div>
 <div class="row">
     <section class="col-md-8 col-md-offset-2">
         <article class="panel panel-default">
@@ -20,7 +15,7 @@ import {Message} from './message';
                 <div class="author">
                     {{ message.userName }}
                 </div>
-                <div class="config">
+                <div class="config pull-right" >
                     <a href="#" (click)="onClick()">Edit</a>
                     <a href="#">Delete</a>
                 </div>
@@ -29,7 +24,7 @@ import {Message} from './message';
     </section>
 </div>
     `,
-  
+ 
   styles: [`
   .author {
     display: inline-block;
