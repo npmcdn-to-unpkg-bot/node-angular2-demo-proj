@@ -14,12 +14,12 @@ var concat = require('gulp-concat');
 
 const tsProject = typescript.createProject('tsconfig.json');
 
-gulp.task('tsconfig-glob', function () {
-  return tsconfig({
-    configPath: '.',
-    indent: 2
-  });
-});
+// gulp.task('tsconfig-glob', function () {
+//   return tsconfig({
+//     configPath: '.',
+//     indent: 2
+//   });
+// });
 
 gulp.task('build-ts', function () {
     return gulp.src(appDev + '**/*.ts')

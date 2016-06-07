@@ -7,27 +7,26 @@ import {MessageService} from './message.service';
 @Component ({
     selector: 'my-message-input',
     template: `
-   <form>
+   <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
         <div class="form-group">
-            <input type="text" class="form-control" #inputVar>
+            <input ngControl="content" type="text" class="form-control" #inputVar >
         </div>
-        <button class="btn btn-primary" (click)="onCreate(inputVar.value)">send message</button>   
+        <button class="btn btn-primary">send message</button>   
    </form>
     `,
-    providers: [MessageService]
+    // providers: [MessageService]
 }) 
 
-export class MessageInputComponent{
-   
+export class MessageInputComponent{   
     
     constructor (private _messageService: MessageService) {
         
     }
-    
-    onCreate(content : string) {
-        const message: Message = new Message(content, null, 'Amax');
-        this._messageService.messages.push(message);
-        this._messageService.getMessages();
+
+    onSubmit(form:any) {
+        const message: Message = new Message(form.content, null, 'Amax');
+        this._messageService.addMessage(message);
         
     }
+
 }

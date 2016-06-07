@@ -1,6 +1,7 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 import {Message} from './message';
+import {MessageService} from './message.service';
 
 @Component({
     selector: 'my-message',
@@ -16,8 +17,8 @@ import {Message} from './message';
                     {{ message.userName }}
                 </div>
                 <div class="config pull-right" >
-                    <a href="#" (click)="onClick()">Edit</a>
-                    <a href="#">Delete</a>
+                    <a href="#" (click)="onEdit()">Edit</a>
+                    <a href="#" (click)="onDelete()">Delete</a>
                 </div>
             </footer>
         </article>
@@ -37,9 +38,18 @@ import {Message} from './message';
 export class MessageComponent {
     @Input() message: Message;
     @Output() messageChange = new EventEmitter<string>();
+
+    constructor(private _messageService: MessageService) { 
+
+    }
   
-    onClick() {
-       this.messageChange.emit('Changed value');
+    onEdit() {
+        this._messageService.editMessage(this.message)     
+    //    this.messageChange.emit(this._messageService);
+    }
+
+    onDelete() {
+        this._messageService.deleteMessage(this.message);
     }
     
 }

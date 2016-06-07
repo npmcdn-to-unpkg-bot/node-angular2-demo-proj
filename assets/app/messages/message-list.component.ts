@@ -3,38 +3,30 @@ import {Component, OnInit} from '@angular/core';
 import {MessageComponent} from './message.component';
 import {MessageService} from './message.service';
 import  {MessageInputComponent} from './message-input.component';
+import {Message} from './message';
 
 
 
 @Component ({
     selector: 'message-list',
     template: `
-       <div>
-            <my-message-input></my-message-input>
+       <div>            
             <my-message *ngFor="let message of messages" [message]="message" (messageChange)="message.content = $event"></my-message>'
        </div>
     `,
     directives: [MessageComponent, MessageInputComponent],
-    providers: [MessageService] 
+    // providers: [MessageService] 
 })
 
 export class MessageListComponent implements OnInit{
-    messages = [];
+    messages: Message[] = [];
     
     constructor(private _messageService: MessageService) {       
         
     }
     
     ngOnInit() {
-        this.messages =  this._messageService.messages;
+        this.messages =  this._messageService.getMessages();
     }
     
-    
-    
-    
-    // message = {content: 'test content', userName: 'Max'}
-    
-    // changeContent (event) {
-    //     this.message.content = "app chaned content"
-    // }
 }
