@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import {ROUTER_DIRECTIVES, Router, RouteSegment} from '@angular/router';
 
 @Component({
     selector: 'my-header',
@@ -30,10 +30,26 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 </nav>
 
     `,
-    directives: [ROUTER_DIRECTIVES]
-
+    directives: [ROUTER_DIRECTIVES],
+    styles: [`
+        .router-link-active {
+            background-color: white;
+        }
+    `]
+    ,providers: [RouteSegment]
 })
 
 export class NavbarComponent {
+    constructor(private _router: Router, private _routeSegment: RouteSegment) {
+
+    }
+
+    // isCurrentRoute (routeUrl) {
+    //     this._router.urlTree.contains(this._router.createUrlTree(['/', this._routeSegment]))
+
+    // }
+
+    
+
 
 }
