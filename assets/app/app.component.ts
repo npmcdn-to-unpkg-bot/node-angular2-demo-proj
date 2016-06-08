@@ -25,7 +25,8 @@ import {AuthenticationComponent} from './auth/authentication.component';
         </div>
     `,
     styleUrls: ['app.styles.css'],
-    directives: [NavbarComponent, ROUTER_DIRECTIVES] 
+    directives: [NavbarComponent, ROUTER_DIRECTIVES]
+
    
 })
 export class AppComponent {

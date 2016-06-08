@@ -33,14 +33,17 @@ import {ROUTER_DIRECTIVES, Router, RouteSegment} from '@angular/router';
     directives: [ROUTER_DIRECTIVES],
     styles: [`
         .router-link-active {
-            background-color: white;
+            font-weight: bold;
+            color: white;
         }
-    `]
-    ,providers: [RouteSegment]
+    `],
+
+
 })
 
 export class NavbarComponent {
-    constructor(private _router: Router, private _routeSegment: RouteSegment) {
+    
+    constructor(private _router: Router) {
 
     }
 
@@ -49,7 +52,8 @@ export class NavbarComponent {
 
     // }
 
-    
 
-
+//   onClick() {
+//     console.log(this.segment);
+//   }
 }
