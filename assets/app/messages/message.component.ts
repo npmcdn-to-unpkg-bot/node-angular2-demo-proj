@@ -44,7 +44,12 @@ export class MessageComponent {
     }
   
     onEdit() {
-        this._messageService.editMessage(this.message)     
+        // var messageBeforeEdit = this.message;
+        this._messageService.editMessage(this.message)
+            // .subscribe(response => {
+            //                         this.message = response;
+            //                         this._messageService.messages[this._messageService.messages.indexOf(messageBeforeEdit)] = response;
+            // })
     //    this.messageChange.emit(this._messageService);
     }
 

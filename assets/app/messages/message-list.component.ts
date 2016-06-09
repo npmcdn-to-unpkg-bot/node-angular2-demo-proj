@@ -14,7 +14,7 @@ import {Message} from './message';
             <my-message *ngFor="let message of messages" [message]="message" (messageChange)="message.content = $event"></my-message>'
        </div>
     `,
-    directives: [MessageComponent, MessageInputComponent],
+    directives: [MessageComponent, MessageInputComponent]
     // providers: [MessageService] 
 })
 
@@ -26,7 +26,13 @@ export class MessageListComponent implements OnInit{
     }
     
     ngOnInit() {
-        this.messages =  this._messageService.getMessages();
+        this._messageService.getMessages()
+            .subscribe(result => { 
+                                  this.messages = result;
+                                  this._messageService.messages = this.messages;
+                                 }
+                                  ,
+                        error => console.log(error))
     }
     
 }

@@ -3,8 +3,9 @@ import { bootstrap } from '@angular/platform-browser-dynamic';
 import {ROUTER_PROVIDERS} from '@angular/router';
 import {provide} from '@angular/core';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {HTTP_PROVIDERS} from '@angular/http';
 
 import { AppComponent } from "./app.component";
 import {MessageService} from './messages/message.service';
 
-bootstrap(AppComponent, [ROUTER_PROVIDERS, MessageService, provide(LocationStrategy, { useClass: HashLocationStrategy })]);
+bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS ,MessageService, provide(LocationStrategy, { useClass: HashLocationStrategy })]);

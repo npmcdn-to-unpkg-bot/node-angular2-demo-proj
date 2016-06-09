@@ -2,10 +2,15 @@ import {Component} from '@angular/core';
 import {Routes, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {SignupComponent} from './signup.component';
+import {SigninComponent} from './signin.component';
+import {LogoutComponent} from './logout.component';
+
 
 
 @Routes([
-    {path: '/signup', component: SignupComponent}       //child routes
+    {path: '/signup', component: SignupComponent},      //child routes
+    {path: '/signin', component: SigninComponent},       //child routes
+    {path: '/logout', component: LogoutComponent},       //child routes
 ])
 
 @Component ({
@@ -15,8 +20,8 @@ import {SignupComponent} from './signup.component';
             <div class="col-md-10 col-md-offset-2">
                     <ul class="nav nav-pills">
                         <li><a [routerLink]="['./signup']">Signup</a></li>
-                        <li><a href="#">Sign-in</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a [routerLink]="['./signin']">Sign-in</a></li>
+                        <li><a [routerLink]="['./logout']">Logout</a></li>
                     </ul>
             </div>
         </div>
