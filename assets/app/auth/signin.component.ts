@@ -27,7 +27,7 @@ export class SigninComponent implements OnInit {
     onSubmit() {
         const user = new User(this.signinForm.value.email, this.signinForm.value.password);
         this._authService.signinUser(user)
-            .subscribe(response =>  console.log(response),
+            .subscribe(data=>  localStorage.setItem('token', data.token),
                                     error => console.log(error)
             )
     }

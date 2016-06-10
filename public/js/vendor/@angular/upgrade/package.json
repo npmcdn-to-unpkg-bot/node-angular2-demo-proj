@@ -2,7 +2,7 @@
   "_args": [
     [
       "@angular/upgrade@2.0.0-rc.1",
-      "C:\\node-angular2-proj"
+      "C:\\node-angular2-demo-proj"
     ]
   ],
   "_from": "@angular/upgrade@2.0.0-rc.1",
@@ -36,7 +36,7 @@
   "_shasum": "50278e5e605b9629e6130db523005951695149ee",
   "_shrinkwrap": null,
   "_spec": "@angular/upgrade@2.0.0-rc.1",
-  "_where": "C:\\node-angular2-proj",
+  "_where": "C:\\node-angular2-demo-proj",
   "author": {
     "name": "angular"
   },
@@ -53,8 +53,8 @@
   "main": "upgrade.js",
   "maintainers": [
     {
-      "email": "angular-core+npm@google.com",
-      "name": "angular"
+      "name": "angular",
+      "email": "angular-core+npm@google.com"
     }
   ],
   "name": "@angular/upgrade",

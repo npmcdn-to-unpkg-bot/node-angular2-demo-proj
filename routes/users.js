@@ -29,7 +29,7 @@ router.post('/', function( req, res, next) {
 
 
 router.post('/signin', function(req,res,next) {
-    User.findOne(req.body.email, function(err, doc) {
+    User.findOne({email: req.body.email }, function(err, doc) {
         if (err) {
             return res.status(404).json({
                 title: 'Error occured',
@@ -46,10 +46,10 @@ router.post('/signin', function(req,res,next) {
                 error: {message: 'Invalid password. try again!'}
             });            
         } 
-        var token = jwt.sign({user: doc}, 'secret-make-sure-you-change-this', {expiresIn: 7200} );
+        var token = jwt.sign({user: doc}, 'secretmakesureyouchangethis', {expiresIn: 7200} );
         res.status(200).json({
             message: 'Successfully logged in',
-            obj: token
+            obj: {'token': token }
         });
     })
 })

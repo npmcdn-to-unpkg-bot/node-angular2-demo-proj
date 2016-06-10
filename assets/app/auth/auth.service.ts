@@ -27,10 +27,8 @@ export class UserAuthService {
 
     signinUser(user: User) {
         return this._http.post(this.userUrl + '/' + 'signin', JSON.stringify(user), {headers: this.headers})
-            .map(response => {
-                                var data = response.json().obj;
-                                localStorage.setItem('token', data.token);
-
+            .map(response => { response.json()
+                             
                              }
             )
             .catch(error => Observable.throw(error.json()));
