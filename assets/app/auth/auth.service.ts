@@ -27,8 +27,8 @@ export class UserAuthService {
 
     signinUser(user: User) {
         return this._http.post(this.userUrl + '/' + 'signin', JSON.stringify(user), {headers: this.headers})
-            .map(response => { response.json()
-                             
+            .map(response => { var data = response.json().obj
+                               return data;
                              }
             )
             .catch(error => Observable.throw(error.json()));
