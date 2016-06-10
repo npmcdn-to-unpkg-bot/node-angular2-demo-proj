@@ -29,6 +29,17 @@ export class MessageInputComponent implements OnInit{
 
     onSubmit(form:any) {
         if (this.message) {
+            this.message.content = form.content;
+            
+            this._messageService.updateMessage(this.message)
+                .subscribe(response => {
+                                        console.log(response);
+                                       }, 
+                                       error => console.log(error)  
+                )
+
+            this.message = null;
+
 
         } else {
         const message: Message = new Message(form.content, null, 'Amax');

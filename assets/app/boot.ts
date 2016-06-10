@@ -7,5 +7,6 @@ import {HTTP_PROVIDERS} from '@angular/http';
 
 import { AppComponent } from "./app.component";
 import {MessageService} from './messages/message.service';
+import {UserAuthService} from './auth/auth.service';
 
-bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS ,MessageService, provide(LocationStrategy, { useClass: HashLocationStrategy })]);
+bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS ,MessageService, UserAuthService, provide(LocationStrategy, { useClass: HashLocationStrategy })]);

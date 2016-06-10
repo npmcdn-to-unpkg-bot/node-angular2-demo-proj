@@ -17,8 +17,8 @@ import {MessageService} from './message.service';
                     {{ message.userName }}
                 </div>
                 <div class="config pull-right" >
-                    <a href="#" (click)="onEdit()">Edit</a>
-                    <a href="#" (click)="onDelete()">Delete</a>
+                    <a (click)="onEdit()">Edit</a>
+                    <a (click)="onDelete()">Delete</a>
                 </div>
             </footer>
         </article>
@@ -44,17 +44,15 @@ export class MessageComponent {
     }
   
     onEdit() {
-        // var messageBeforeEdit = this.message;
         this._messageService.editMessage(this.message)
-            // .subscribe(response => {
-            //                         this.message = response;
-            //                         this._messageService.messages[this._messageService.messages.indexOf(messageBeforeEdit)] = response;
-            // })
-    //    this.messageChange.emit(this._messageService);
+
     }
 
     onDelete() {
-        this._messageService.deleteMessage(this.message);
+        this._messageService.deleteMessage(this.message)
+        .subscribe(response => console.log(response)
+                  , error => console.log(error)
+        );
     }
     
 }

@@ -1,12 +1,36 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ControlGroup, FormBuilder, Validators} from '@angular/common';
 
+import {User} from './user';
+import {UserAuthService} from './auth.service';
 
 @Component({
     moduleId: module.id,
-    template:'<p>signin area</p>'
+    templateUrl:'signin.template.html'
 })
 
-export class SigninComponent {
+export class SigninComponent implements OnInit {
+    signinForm: ControlGroup;
+
+    constructor(private _fb: FormBuilder, private _authService: UserAuthService) {
+
+    }
+
+    ngOnInit() {
+        this.signinForm = this._fb.group({
+            email: [],
+            password:[]
+        })
+
+    }
+
+    onSubmit() {
+        const user = new User(this.signinForm.value.email, this.signinForm.value.password);
+        this._authService.signinUser(user)
+            .subscribe(response =>  console.log(response),
+                                    error => console.log(error)
+            )
+    }
 
 
 }

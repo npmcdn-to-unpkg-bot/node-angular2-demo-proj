@@ -1,7 +1,10 @@
 
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 import {Message} from './message';
 
@@ -37,24 +40,37 @@ export class MessageService {
                                         return message;
                     
                   
-                  });
+                  })
+                  .catch(error => Observable.throw(error.json()));
 
             }
 
             deleteMessage(message: Message) {
                 this.messages.splice(this.messages.indexOf(message), 1);
+                return this._http.delete(this.messageUrl + '/' + message.messageId, { headers: this.headers })
+                     .map(response => { const data = response.json().obj;
+                                        var message = new Message(data.content, data._id, 'KDDJ', null)
+                                      }
+                     )
+                     .catch(error => Observable.throw(error.json()));
+                     
             }
 
             editMessage(message: Message) {
-                // this.messages[this.messages.indexOf(message)] = new Message('Edited', null, 'KDDJ');
-                // message = new Message ('Edited', message.messageId, 'KDDJ', null);
-                // return this._http.put(this.messageUrl + '/' + message.messageId, JSON.stringify(message), {headers: this.headers})
-                //     .map(response => {  const data = response.json().obj; 
-                //                          let message = new Message(data.content, data._id, 'AJAXFakeUser12', null);
-                //                         return message;
-
                 this.messageIsEdited.emit(message);
            
                 // });
+             }
+
+             updateMessage(message: Message) {
+                //this.messages[this.messages.indexOf(message)] = new Message('Edited', null, 'KDDJ');
+                message = new Message (message.content, message.messageId, 'KDDJ', null);
+                return this._http.patch(this.messageUrl + '/' + message.messageId, JSON.stringify(message), {headers: this.headers})
+                    .map(response => {  const data = response.json().obj; 
+                                         let message = new Message(data.content, data._id, 'KDDJ', null);
+                                         return message;
+                                    }
+                    )
+                    .catch(error => Observable.throw(error.json()));
              }
 }

@@ -40,11 +40,11 @@ router.post('/', function (req, res) {
 });
 
 
-router.put('/:id', function(req, res) {
+router.patch('/:id', function(req, res) {
     Message.findByIdAndUpdate(req.params.id, req.body, function(err, doc) {
         if (err) {
             return res.status(404).json({
-                title: 'An error occured',
+                title: 'An error occured during update',
                 error: err
             });            
         }        
@@ -55,6 +55,21 @@ router.put('/:id', function(req, res) {
     });
 });
 
+router.delete('/:id', function(req, res) {
+    var messageResponse = req.body;
+    Message.findByIdAndRemove(req.params.id, req.body, function(err, doc) {
+        if (err) {
+            return res.status(404).json({
+                title: 'An error occured during delete',
+                error: err
+            });            
+        }        
+        return res.status(200).json({
+            message: 'Message deleted',
+            obj: messageResponse
+        });
+    });
+});
 
 
 module.exports = router;
