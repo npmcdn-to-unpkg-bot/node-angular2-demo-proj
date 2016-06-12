@@ -34,5 +34,9 @@ export class UserAuthService {
             .catch(error => Observable.throw(error.json()));
     }
 
+    logoutUser() {
+        localStorage.clear();
+    } 
+
 
 }
