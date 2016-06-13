@@ -26,7 +26,7 @@ export class MessageService {
                                             const data = response.json().obj;
                                             let objs: any[] = [];
                                             data.forEach(function(obj) {
-                                                let message = new Message(obj.content, obj._id, 'AJAXFakeUser', null);
+                                                let message = new Message(obj.content, obj._id, obj.user.firstName, obj.user._id);
                                                 objs.push(message);  
                                             });
                                             console.log(objs);
@@ -38,7 +38,7 @@ export class MessageService {
                 const token =  localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : ' ';
                 return this._http.post(this.messageUrl + token, JSON.stringify(message), {headers: this.headers})
                     .map(response => {  const data = response.json().obj; 
-                                         let message = new Message(data.content, data._id, 'AJAXFakeUser12', null);
+                                         let message = new Message(data.content, data._id, data.user.firstName, data.user._id);
                                         return message;
                     
                   
@@ -71,7 +71,7 @@ export class MessageService {
                 message = new Message (message.content, message.messageId, 'KDDJ', null);
                 return this._http.patch(this.messageUrl + '/' + message.messageId + token, JSON.stringify(message), {headers: this.headers})
                     .map(response => {  const data = response.json().obj; 
-                                         let message = new Message(data.content, data._id, 'KDDJ', null);
+                                         let message = new Message(data.content, data._id, data.user.firstName, data.user._id);
                                          return message;
                                     }
                     )
