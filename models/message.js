@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var User = require('./user');
 
 var messageSchema = new Schema({
    content: { type: String, required: true},
@@ -7,5 +8,12 @@ var messageSchema = new Schema({
     
 });
 
+messageSchema.post('remove', function(doc) {
+    var deletedMessage = doc;
+    User.findById(doc.user, function(err,doc){
+        doc.messages.pull(deletedMessage);
+        doc.save();
+    });
+})
 
 module.exports = mongoose.model('Message', messageSchema);

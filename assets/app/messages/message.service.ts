@@ -14,7 +14,8 @@ export class MessageService {
             messageIsEdited = new EventEmitter<Message>();
 
             messageUrl = 'http://localhost:3000/message';
-            headers = new Headers({'Content-Type': 'application/json'})
+            headers = new Headers({'Content-Type': 'application/json'});
+            
 
             constructor(private _http: Http) { }
 
@@ -34,7 +35,8 @@ export class MessageService {
             }
             
             addMessage(message : Message) {
-                return this._http.post(this.messageUrl, JSON.stringify(message), {headers: this.headers})
+                const token =  localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : ' ';
+                return this._http.post(this.messageUrl + token, JSON.stringify(message), {headers: this.headers})
                     .map(response => {  const data = response.json().obj; 
                                          let message = new Message(data.content, data._id, 'AJAXFakeUser12', null);
                                         return message;
@@ -46,10 +48,11 @@ export class MessageService {
             }
 
             deleteMessage(message: Message) {
+                const token =  localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : ' ';
                 this.messages.splice(this.messages.indexOf(message), 1);
-                return this._http.delete(this.messageUrl + '/' + message.messageId, { headers: this.headers })
+                return this._http.delete(this.messageUrl + '/' + message.messageId + token, { headers: this.headers })
                      .map(response => { const data = response.json().obj;
-                                        var message = new Message(data.content, data._id, 'KDDJ', null)
+                                        var message = new Message(data.content, data._id, data.user.firstName, data.user._id)
                                       }
                      )
                      .catch(error => Observable.throw(error.json()));
@@ -63,9 +66,10 @@ export class MessageService {
              }
 
              updateMessage(message: Message) {
+                const token =  localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : ' ';
                 //this.messages[this.messages.indexOf(message)] = new Message('Edited', null, 'KDDJ');
                 message = new Message (message.content, message.messageId, 'KDDJ', null);
-                return this._http.patch(this.messageUrl + '/' + message.messageId, JSON.stringify(message), {headers: this.headers})
+                return this._http.patch(this.messageUrl + '/' + message.messageId + token, JSON.stringify(message), {headers: this.headers})
                     .map(response => {  const data = response.json().obj; 
                                          let message = new Message(data.content, data._id, 'KDDJ', null);
                                          return message;
